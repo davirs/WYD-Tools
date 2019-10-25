@@ -1,0 +1,51 @@
+{
+	"name": "wyd-tools",
+	"version": "1.0.0",
+	"description": "Uma série de editores de arquivos WYD em apenas um projeto.",
+	"license": "ISC",
+	"author": {
+		"name": "Nelson Faiçal Rechdan"
+	},
+	"keywords": [
+		"WYD",
+		"Tools"
+	],
+	"homepage": "https://github.com/Rechdan/WYD-Tools#readme",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Rechdan/WYD-Tools.git"
+	},
+	"bugs": {
+		"url": "https://github.com/Rechdan/WYD-Tools/issues"
+	},
+	"scripts": {
+		"dev": "cross-env NODE_ENV=development parcel ./src/public/index.html -d ./build-dev --no-cache",
+		"deploy": "cross-env NODE_ENV=production parcel build ./src/public/index.html -d ./build --no-cache --public-url https://rechdan.github.io/WYD-Tools/ && gh-pages -d ./build"
+	},
+	"dependencies": {
+		"bootstrap": "^4.3.1",
+		"react": "^16.11.0",
+		"react-dom": "^16.11.0",
+		"react-router-dom": "^5.1.2",
+		"reactstrap": "^8.1.1",
+		"styled-components": "^4.4.0"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.6.4",
+		"@babel/plugin-proposal-class-properties": "^7.5.5",
+		"@babel/preset-env": "^7.6.3",
+		"@babel/preset-react": "^7.6.3",
+		"@types/node": "^12.11.7",
+		"@types/react": "^16.9.10",
+		"@types/react-dom": "^16.9.2",
+		"@types/react-router-dom": "^5.1.0",
+		"@types/reactstrap": "^8.0.6",
+		"@types/styled-components": "^4.1.19",
+		"@types/webpack-env": "^1.14.1",
+		"cross-env": "^6.0.3",
+		"gh-pages": "^2.1.1",
+		"parcel-bundler": "^1.12.4",
+		"react-hot-loader": "^4.12.15",
+		"typescript": "^3.6.4"
+	}
+}

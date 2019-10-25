@@ -1,9 +1,13 @@
 // npm
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+// store
+import store from './store';
 
 // pages
 import Pages from './pages';
@@ -15,8 +19,10 @@ if (module.hot) {
 
 // render
 ReactDOM.render(
-	<HashRouter>
-		<Pages />
-	</HashRouter>,
+	<Provider store={store}>
+		<HashRouter>
+			<Pages />
+		</HashRouter>
+	</Provider>,
 	document.querySelector('#hero'),
 );

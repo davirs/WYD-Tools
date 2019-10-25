@@ -1,25 +1,29 @@
 // npm
 import React from 'react';
 import styled from 'styled-components';
-import { RouteProps, Redirect, Switch, Route } from 'react-router-dom';
+import { Redirect, Switch, Route } from 'react-router-dom';
 
 // pages
 import Home from './Home';
-
-// components
-import Topnav from '../components/Topnav';
-import Footer from '../components/Footer';
 import Serverlist from './Serverlist';
 
+// components
+import PathCleaner from '../components/PathCleaner';
+import PathUpdater from '../components/PathUpdate';
+import Topnav from '../components/Topnav';
+import Footer from '../components/Footer';
+
 // types
-interface Item extends RouteProps {
-	name?: string;
+interface Item {
+	name: string;
+	path: string;
+	Component: Function;
 }
 
 // style
 const S = {
 	Pages: styled.div`
-		background: rgba(245, 245, 245, 1);
+		background: rgba(255, 255, 255, 1);
 		overflow-y: scroll;
 		overflow-x: auto;
 		position: fixed;
@@ -48,18 +52,14 @@ const S = {
 export function getPages(): Item[] {
 	return [
 		{
-			path: '/home',
-			children: Home,
 			name: 'Home',
+			path: '/home',
+			Component: Home,
 		},
 		{
-			path: '/server-list',
-			children: Serverlist,
 			name: 'Serverlist',
-		},
-		{
-			path: '',
-			children: () => <Redirect to='/home' />,
+			path: '/server-list',
+			Component: Serverlist,
 		},
 	];
 }
@@ -73,9 +73,17 @@ export default function Pages() {
 
 				<S.Content>
 					<Switch>
-						{getPages().map((props, i) => (
-							<Route key={i} {...props} />
+						{getPages().map(({ path, Component }, i) => (
+							<Route key={i} path={path}>
+								<PathCleaner />
+								<PathUpdater />
+								<Component />
+							</Route>
 						))}
+
+						<Route>
+							<Redirect to='/home' />
+						</Route>
 					</Switch>
 				</S.Content>
 

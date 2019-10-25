@@ -1,8 +1,14 @@
 // npm
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import { Navbar, Container, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
+
+// store
+import { DucksType } from '../../store/ducks';
+
+// pages
 import { getPages } from '../../pages';
 
 // style
@@ -19,6 +25,8 @@ const S = {
 
 // default
 export default function Topnav() {
+	const paths = useSelector((s: DucksType) => s.Paths);
+
 	const [open, setOpen] = useState<boolean>(false);
 
 	return (
@@ -33,13 +41,13 @@ export default function Topnav() {
 
 					<Collapse isOpen={open} navbar>
 						<Nav className='ml-auto' navbar>
-							{getPages()
-								.filter(({ name }) => name)
-								.map(({ path, name }, i) => (
-									<NavItem key={i}>
+							{getPages().map(({ path, name }, i) => {
+								return (
+									<NavItem key={i} active={paths.findIndex(a => a === path) !== -1}>
 										<NavLink tag={Link} to={path} children={name} />
 									</NavItem>
-								))}
+								);
+							})}
 
 							<NavItem>
 								<NavLink href='https://github.com/Rechdan/WYD-Tools' target='_blank'>

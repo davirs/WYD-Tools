@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Navbar, Container, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { getPages } from '../../pages';
 
 // style
 const S = {
@@ -32,11 +33,13 @@ export default function Topnav() {
 
 					<Collapse isOpen={open} navbar>
 						<Nav className='ml-auto' navbar>
-							<NavItem>
-								<NavLink tag={Link} to='/home'>
-									Home
-								</NavLink>
-							</NavItem>
+							{getPages()
+								.filter(({ name }) => name)
+								.map(({ path, name }, i) => (
+									<NavItem key={i}>
+										<NavLink tag={Link} to={path} children={name} />
+									</NavItem>
+								))}
 
 							<NavItem>
 								<NavLink href='https://github.com/Rechdan/WYD-Tools' target='_blank'>

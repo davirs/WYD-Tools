@@ -9,9 +9,12 @@ import Home from './Home';
 // components
 import Topnav from '../components/Topnav';
 import Footer from '../components/Footer';
+import Serverlist from './Serverlist';
 
 // types
-type Item = RouteProps;
+interface Item extends RouteProps {
+	name?: string;
+}
 
 // style
 const S = {
@@ -42,20 +45,24 @@ const S = {
 };
 
 // pages
-const pages: Item[] = [
-	{
-		path: '/home',
-		children: Home,
-	},
-	{
-		path: '/server-list',
-		children: Home,
-	},
-	{
-		path: '',
-		children: () => <Redirect to='/home' />,
-	},
-];
+export function getPages(): Item[] {
+	return [
+		{
+			path: '/home',
+			children: Home,
+			name: 'Home',
+		},
+		{
+			path: '/server-list',
+			children: Serverlist,
+			name: 'Serverlist',
+		},
+		{
+			path: '',
+			children: () => <Redirect to='/home' />,
+		},
+	];
+}
 
 // default
 export default function Pages() {
@@ -66,7 +73,7 @@ export default function Pages() {
 
 				<S.Content>
 					<Switch>
-						{pages.map((props, i) => (
+						{getPages().map((props, i) => (
 							<Route key={i} {...props} />
 						))}
 					</Switch>

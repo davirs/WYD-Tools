@@ -1,7 +1,7 @@
 // npm
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -15,8 +15,8 @@ if (module.hot) {
 
 // render
 ReactDOM.render(
-	<BrowserRouter basename='/WYD-Tools'>
+	<HashRouter>
 		<Pages />
-	</BrowserRouter>,
+	</HashRouter>,
 	document.querySelector('#hero'),
 );
